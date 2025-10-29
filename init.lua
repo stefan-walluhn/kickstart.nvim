@@ -693,18 +693,13 @@ require('lazy').setup({
             },
           },
         },
-        pylsp = {
+        isort = {},
+        pyright = {
           settings = {
-            pylsp = {
-              plugins = {
-                pycodestyle = {
-                  maxLineLength = 88,
-                  ignore = 'E203,E701,W503',
-                },
-              },
-            },
+            python = { pythonPath = './bin/python' },
           },
         },
+        ruff = {},
         ruby_lsp = {},
         ts_ls = {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
@@ -737,7 +732,6 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'black',
         'prettier',
         'rubocop',
         'stylua', -- Used to format Lua code
@@ -795,8 +789,9 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'black' },
+        python = { 'ruff format', 'isort' },
         javascript = { 'prettier' },
+        typescript = { 'prettier' },
         vue = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
