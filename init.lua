@@ -699,7 +699,6 @@ require('lazy').setup({
           },
         },
         ruby_lsp = {},
-        ruff = {},
         ts_ls = {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           init_options = {
