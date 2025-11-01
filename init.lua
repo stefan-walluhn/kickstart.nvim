@@ -693,14 +693,13 @@ require('lazy').setup({
             },
           },
         },
-        isort = {},
         pyright = {
           settings = {
             python = { pythonPath = './bin/python' },
           },
         },
-        ruff = {},
         ruby_lsp = {},
+        ruff = {},
         ts_ls = {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
           init_options = {
@@ -717,8 +716,6 @@ require('lazy').setup({
         yamlls = {},
       }
 
-      -- Ensure the servers and tools above are installed
-      --
       -- To check the current status of installed tools and/or manually install
       -- other tools, you can run
       --    :Mason
@@ -730,12 +727,18 @@ require('lazy').setup({
       --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
+      local ensure_installed = {
+        'ansiblels',
+        'lua_ls',
         'prettier',
+        'pyright',
         'rubocop',
-        'stylua', -- Used to format Lua code
-      })
+        'ruby_lsp',
+        'stylua',
+        'ts_ls',
+        'volar',
+        'yamlls',
+      }
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
@@ -789,7 +792,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'ruff format', 'isort' },
+        python = { 'isort', 'black' },
         javascript = { 'prettier' },
         typescript = { 'prettier' },
         vue = { 'prettier' },
