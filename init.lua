@@ -111,18 +111,14 @@ require('conform').setup {
     lsp_format = 'fallback',
   },
   formatters_by_ft = {
+    css = { 'prettier' },
+    html = { 'prettier' },
+    javascript = { 'prettier' },
     lua = { 'stylua' },
     python = { 'isort', 'black' },
-    javascript = { 'prettier' },
+    rust = { 'rustfmt', lsp_format = 'fallback' },
     typescript = { 'prettier' },
     vue = { 'prettier' },
-    html = { 'prettier' },
-    -- Conform can also run multiple formatters sequentially
-    -- python = { "isort", "black" },
-    --
-    -- You can use 'stop_after_first' to run the first available formatter from the list
-    -- javascript = { "prettierd", "prettier", stop_after_first = true },
-    rust = { 'rustfmt', lsp_format = 'fallback' },
   },
 }
 
@@ -263,6 +259,8 @@ vim.lsp.config('ts_ls', {
 })
 
 vim.lsp.enable 'ansiblels'
+vim.lsp.enable 'cssls'
+vim.lsp.enable 'html'
 vim.lsp.enable 'lua_ls'
 vim.lsp.enable 'pyright'
 vim.lsp.enable 'rubocop'
