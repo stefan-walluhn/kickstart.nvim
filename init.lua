@@ -81,7 +81,6 @@ vim.pack.add {
   'https://github.com/lewis6991/gitsigns.nvim',
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/nvim-lualine/lualine.nvim',
-  'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/nvim-telescope/telescope-ui-select.nvim',
   'https://github.com/nvim-telescope/telescope.nvim',
   'https://github.com/nvim-tree/nvim-web-devicons',
@@ -173,7 +172,6 @@ require('telescope').setup {
 
 require('telescope').load_extension 'ui-select'
 
---require('mini.statusline').setup { use_icons = vim.g.have_nerd_font }
 require('lualine').setup {
   sections = { lualine_y = { 'lsp_status' } },
 }
