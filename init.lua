@@ -114,10 +114,22 @@ require('conform').setup {
     html = { 'prettier' },
     javascript = { 'prettier' },
     lua = { 'stylua' },
-    python = { 'isort', 'black' },
+    python = { 'black', 'ruff_organize_imports', 'ruff_format' },
     rust = { 'rustfmt', lsp_format = 'fallback' },
     typescript = { 'prettier' },
     vue = { 'prettier' },
+  },
+  formatters = {
+    ruff_remove_unused_imports = {
+      command = 'ruff',
+      args = { 'check', '--fix', '--force-exclude', '--select=F401', '--exit-zero', '--no-cache', '--stdin-filename', '$FILENAME', '-' },
+      stdin = true,
+      cwd = require('conform.util').root_file {
+        'pyproject.toml',
+        'ruff.toml',
+        '.ruff.toml',
+      },
+    },
   },
 }
 
@@ -238,7 +250,7 @@ vim.lsp.config('lua_ls', {
 
 vim.lsp.config('pyright', {
   settings = {
-    python = { pythonPath = './bin/python' },
+    python = { pythonPath = '.venv/bin/python' },
   },
 })
 
@@ -256,15 +268,19 @@ vim.lsp.config('ts_ls', {
   },
 })
 
+vim.lsp.config('pyrefly', { cmd = { '.venv/bin/pyrefly', 'lsp' } })
+
 vim.lsp.enable 'ansiblels'
 vim.lsp.enable 'cssls'
 vim.lsp.enable 'eslint'
 vim.lsp.enable 'html'
 vim.lsp.enable 'jsonls'
 vim.lsp.enable 'lua_ls'
+vim.lsp.enable 'pyrefly'
 vim.lsp.enable 'pyright'
 vim.lsp.enable 'rubocop'
 vim.lsp.enable 'ruby_lsp'
+vim.lsp.enable 'ruff'
 vim.lsp.enable 'ts_ls'
 vim.lsp.enable 'yamlls'
 
